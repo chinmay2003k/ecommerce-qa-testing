@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - QA Shop</title>
+</head>
+<body>
+
+    <h1>QA Shop</h1>
+    <h2>Login</h2>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <label>Username:</label>
+        <input type="text" name="username" id="username">
+
+        <br><br>
+
+        <label>Password:</label>
+        <input type="password" name="password" id="password">
+
+        <br><br>
+
+        <button type="submit" id="login-button">Login</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout - QA Shop</title>
+</head>
+<body>
+
+    <h1>Checkout</h1>
+
+    {% if success %}
+
+        <h2>{{ success }}</h2>
+
+        <p>Thank you for shopping with QA Shop.</p>
+
+        <a href="/products">
+            <button>Continue Shopping</button>
+        </a>
+
+    {% else %}
+
+        <h2>Order Summary</h2>
+
+        {% if cart_items %}
+
+            {% for item in cart_items %}
+                <p>{{ item.name }} - ₹{{ item.price }}</p>
+            {% endfor %}
+
+            <h3>Total: ₹{{ total }}</h3>
+
+            <hr>
+
+            <h2>Customer Details</h2>
+
+            <form method="POST">
+
+                <label>Full Name:</label>
+                <input type="text" name="name" id="name" required>
+
+                <br><br>
+
+                <label>Address:</label>
+                <textarea name="address" id="address" required></textarea>
+
+                <br><br>
+
+                <label>Payment Method:</label>
+
+                <select name="payment" id="payment">
+                    <option value="">Select Payment Method</option>
+                    <option value="card">Credit/Debit Card</option>
+                    <option value="upi">UPI</option>
+                    <option value="cod">Cash on Delivery</option>
+                </select>
+
+                <br><br>
+
+                <button type="submit" id="place-order">
+                    Place Order
+                </button>
+
+            </form>
+
+        {% else %}
+
+            <p>Your cart is empty.</p>
+
+            <a href="/products">
+                <button>Back to Products</button>
+            </a>
+
+        {% endif %}
+
+    {% endif %}
+
+</body>
+</html>

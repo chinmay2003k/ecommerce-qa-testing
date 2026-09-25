@@ -1,0 +1,45 @@
+
+{
+    "info": {
+        "name": "QA Shop API Testing",
+        "description": "API test collection for QA Shop",
+        "version": "1.0"
+    },
+    "requests": [
+        {
+            "name": "Login API",
+            "method": "POST",
+            "url": "http://127.0.0.1:5000/login",
+            "test_type": "Positive",
+            "expected_result": "Login request should be accepted with valid credentials"
+        },
+        {
+            "name": "Login - Invalid Credentials",
+            "method": "POST",
+            "url": "http://127.0.0.1:5000/login",
+            "test_type": "Negative",
+            "expected_result": "Invalid username or password should be displayed"
+        },
+        {
+            "name": "Products Page",
+            "method": "GET",
+            "url": "http://127.0.0.1:5000/products",
+            "test_type": "Functional",
+            "expected_result": "Products page should be accessible after login"
+        },
+        {
+            "name": "Cart Page",
+            "method": "GET",
+            "url": "http://127.0.0.1:5000/cart",
+            "test_type": "Functional",
+            "expected_result": "Cart page should display cart items"
+        },
+        {
+            "name": "Checkout Page",
+            "method": "GET",
+            "url": "http://127.0.0.1:5000/checkout",
+            "test_type": "Functional",
+            "expected_result": "Checkout page should display order summary"
+        }
+    ]
+}

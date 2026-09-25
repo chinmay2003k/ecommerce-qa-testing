@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products - QA Shop</title>
+</head>
+<body>
+
+    <h1>QA Shop - Products</h1>
+
+    <p>Welcome, {{ session["user"] }}!</p>
+
+    <hr>
+
+    {% for product in products %}
+
+        <div>
+            <h3>{{ product.name }}</h3>
+            <p>Price: ₹{{ product.price }}</p>
+
+            <a href="/add-to-cart/{{ product.id }}">
+                <button>Add to Cart</button>
+            </a>
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+    <a href="/cart">
+        <button>View Cart</button>
+    </a>
+
+    <a href="/logout">
+        <button>Logout</button>
+    </a>
+
+</body>
+</html>
