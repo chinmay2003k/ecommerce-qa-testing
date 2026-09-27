@@ -1,0 +1,56 @@
+
+name: QA Automation Tests
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  qa-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install flask openpyxl selenium pytest
+
+      - name: Start Flask Application
+        run: |
+          python -u application/app.py > flask.log 2>&1 &
+          echo $! > flask.pid
+          sleep 5
+
+      - name: Check Flask Application
+        run: |
+          curl --fail --retry 10 --retry-delay 1 http://127.0.0.1:5000/login
+
+      - name: Run QA Automation Tests
+        run: |
+          python -m pytest automation/ -v -s
+
+      - name: Display Flask Logs
+        if: always()
+        run: |
+          echo "===== FLASK LOG ====="
+          cat flask.log || true
+
+      - name: Stop Flask Application
+        if: always()
+        run: |
+          kill $(cat flask.pid) || true
